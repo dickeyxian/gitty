@@ -9,9 +9,10 @@ var Command = require('./lib/command');
 * Setup function for getting access to a GIT repo
 * @constructor
 * @param {string} path
+* @param {string} [gitpath]
 */
-var Gitty = function(path) {
-  return new Repository(path);
+var Gitty = function(path, gitpath) {
+  return new Repository(path, gitpath);
 };
 
 /**
