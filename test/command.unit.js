@@ -15,7 +15,7 @@ describe('Command', function() {
     });
 
     it('should save the working path', function(done) {
-      command.repo.should.equal(HOME);
+      command.repo.path.should.equal(HOME);
       done();
     });
 
