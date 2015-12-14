@@ -24,6 +24,11 @@ describe('Command', function() {
       done();
     });
 
+    it('should use the supplied gitpath from the repo object', function() {
+      var cmd = new Command({ gitpath: '/path/to/git' });
+      cmd.repo.gitpath.should.equal('/path/to/git');
+    });
+
   });
 
   describe('.exec()', function() {
@@ -35,6 +40,14 @@ describe('Command', function() {
       });
     });
 
+    it('should use the repo gitpath for executing the command', function(done) {
+      var cmd = new Command({ path: HOME, gitpath: '/path/to/git' });
+      cmd.exec(function(err, stderr, stdout) {
+        should.exist(err);
+        done();
+      });
+    });
+
   });
 
   describe('.execSync()', function() {
@@ -42,6 +55,15 @@ describe('Command', function() {
     it('should execute the command synchronously', function(done) {
       should.exist(command.execSync());
       done();
+    });
+
+    it('should use the repo gitpath for executing the command', function(done) {
+      var cmd = new Command({ path: HOME, gitpath: '/path/to/git' });
+      try {
+        cmd.execSync();
+      } catch (err) {
+        done();
+      }
     });
 
   });
