@@ -40,12 +40,20 @@ describe('Repository', function() {
     rimraf.sync(HOME + '/.gitty/test2');
   });
 
+  describe('.isGit()', function() {
+    it('should return false', function() {
+      repo1.isGit().should.equal(false);
+      repo2.isGit().should.equal(false);
+    });
+  });
+
   describe('.init()', function() {
 
     it('should initialize the new repository', function(done) {
       repo1.init(function(err) {
         should.not.exist(err);
         repo1.initialized.should.equal(true);
+        repo1.isGit().should.equal(true);
         done();
       });
     });
